@@ -199,6 +199,10 @@ int main(int argc, char** argv){
    }
    
    if (t.getDay() - lastDay){
+    fclose(allNoticeFile);
+    allNoticeFile = fopen("temp.txt", "w");
+
+
     fprintf(dayNoticeFile, "time: %s\n", t.getLocalTime().c_str());
     fprintf(dayNoticeFile, "Temperature: %d\n\n", sumInDay/countInDay);
     fflush(dayNoticeFile);
@@ -209,10 +213,12 @@ int main(int argc, char** argv){
    if (t.getMonth() - lastMonth){
     fclose(hourNoticeFile);
     hourNoticeFile = fopen("tempInHour.txt", "w");
+    lastMonth = t.getMonth();
    }
    if (t.getYear() - lastYear){
     fclose(dayNoticeFile);
     dayNoticeFile = fopen("tempInDay.txt", "w");
+    lastYear = t.getYear();
   }
 
   }
